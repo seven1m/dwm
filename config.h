@@ -49,6 +49,8 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "gnome-terminal", NULL };
+static const char *dclipcmd[] = { "dclip", "paste", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor , "-sf", selfgcolor, NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -74,9 +76,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-        { 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -c 0 set Master 1dB-") },
-        { 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer -c 0 set Master 1dB+") },
-        { 0,                            XF86XK_AudioMute,        spawn, SHCMD("amixer -c 0 set Master toggle") },
+  { 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -c 0 set Master 1dB-") },
+  { 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer -c 0 set Master 1dB+") },
+  { 0,                            XF86XK_AudioMute,        spawn, SHCMD("amixer -c 0 set Master toggle") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -87,6 +89,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+  { MODKEY|ControlMask,           XK_c,      spawn,          SHCMD("exec dclip copy") },
+  { MODKEY|ControlMask,           XK_v,      spawn,          {.v = dclipcmd } },
 };
 
 /* button definitions */
